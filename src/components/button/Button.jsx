@@ -1,10 +1,11 @@
 const Button = ({
     onClick,
-    className,
+    className = "",
     children,
     full = false,
     bgColor = "primary",
     type = "button",
+    ...props
 }) => {
     let bgClassName = "bg-primary";
     switch (bgColor) {
@@ -22,6 +23,7 @@ const Button = ({
             className={` px-6 py-3 mt-auto text-white capitalize rounded-lg ${
                 full ? "w-full" : ""
             } ${bgClassName} ${className}`}
+            {...props}
         >
             {children}
         </button>

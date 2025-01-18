@@ -1,9 +1,10 @@
 import useSWR from "swr";
 import fetcher, { tmdbAPI } from "../config";
-import MovieCard from "../components/movie/MovieCard";
+import MovieCard, { MovieCardSkeleton } from "../components/movie/MovieCard";
 import { useState } from "react";
 import useDebounce from "../hooks/useDebounce";
 import ReactPaginate from "react-paginate";
+import { v4 } from "uuid";
 
 const itemsPerPage = 20;
 
@@ -65,8 +66,15 @@ const MoviesPage = () => {
             </div>
 
             {/* Loading */}
-            {isLoading && (
+            {/* {isLoading && (
                 <div className="w-10 h-10 mx-auto border-4 rounded-full border-b-secondary border-t-secondary border-primary animate-spin"></div>
+            )} */}
+            {isLoading && (
+                <div className="grid grid-cols-4 gap-10">
+                    {new Array(itemsPerPage).fill(0).map(() => (
+                        <MovieCardSkeleton key={v4()}></MovieCardSkeleton>
+                    ))}
+                </div>
             )}
 
             {/* Danh sách phim */}
